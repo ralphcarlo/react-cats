@@ -9,6 +9,8 @@ export const BreedProvider = ({ children, breed, limit, prevBreed }) => {
   const [showMore, setShowMore] = useState(limit);
   const [statusText, setStatusText] = useState('Load more');
 
+  // renders limit change when load more button is clicked
+  // currently missing a reset of the limit to its default = 10
   useEffect(() => {
     async function fetchData() {
       if (breed.length !== 0) {
@@ -19,6 +21,7 @@ export const BreedProvider = ({ children, breed, limit, prevBreed }) => {
     fetchData();
   }, [showMore, breed]);
 
+  // handles previous state for selected breed when back button is clicked
   useEffect(() => {
     async function fetchPrevData() {
       const request = await axios.get(requests.fetchBreed + 'page=1&limit=' + showMore + '&breed_id=' + prevBreed);
